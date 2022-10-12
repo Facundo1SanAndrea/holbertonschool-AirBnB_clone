@@ -9,7 +9,7 @@ import cmd
 class HBNBCommand(cmd.Cmd):
     """command interpeter"""
 
-    prompt: '(hbnb) '
+    prompt: '(hbnb)'
 
     def do_quit(self, args):
         """exit program"""
