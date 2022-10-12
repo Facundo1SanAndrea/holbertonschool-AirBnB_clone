@@ -7,8 +7,8 @@ import models
 
 class BaseModel:
     """A class of a base modle"""
-    
-    def __init__(self, *args, **kwargs):
+
+    def init(self, *args, **kwargs):
         """public instance attri"""
         forma_t = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs is not None and len(kwargs) != 0:
@@ -29,7 +29,7 @@ class BaseModel:
                 self.update_at = datetime.now()
             models.storage.new(self)
 
-    def __str__(self):
+    def str(self):
         """Prints tha name, id and dict"""
         return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
 
