@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Class for a base modle"""
-from datetime import datetime
-
+import json
 import uuid
-
+from datetime import datetime
 import models
 
 class BaseModel:
@@ -41,8 +40,8 @@ class BaseModel:
 
     def to_dict(self):
         """returns a dictionary containing all keys/values"""
-        self.created_at = self.created_at.isoformat()
-        self.update_at = self.update_at.isoformat()
-        new_dict = self.__dict__
-        new_dict["__class__"] = __class__.__name__
+        new_dict = self.__dict__.copy()
+        new_dict["created_at"] = self.created_at.isoformat()
+        new_dict["updated_at"] = self.updated_at.isoformat()
+        new_dict['__class__'] = self.__class__.__name__
         return new_dict
