@@ -6,31 +6,33 @@ import uuid
 
 import models
 
-import json
-
 class BaseModel:
     """A class of a base modle"""
     
     def __init__(self, *args, **kwargs):
-        if kwargs:
-            for i in kwargs:
-                if i == 'id':
-                    self.id = str(kwargs[i])
-                if i == 'created_at':
-                    time_now = datetime.strptime(kwargs[i], '%Y-%m-%dT%H:%M:%S.%f')
-                    self.created_at = time_now
-                if i == 'updated_at':
-                    update_time = datetime.strptime(kwargs[i], '%Y-%m-%dT%H:%M:%S.%f')
-                    self.update_at = update_time
+        """public instance attri"""
+        forma_t = '%Y-%m-%dT%H:%M:%S.%f'
+        if kwargs is not None and len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    pass
+                elif key == "id":
+                    self.id = value
+                elif key == "created_at":
+                    self.created_at = datetime.strptime(value, forma_t)
+                elif key == "updateed_at":
+                    self.update_at = datetime.strptime(value, forma_t)
+                else:
+                    setattr(self, key, value)
             else:
                 self.id = str(uuid.uuid4())
                 self.created_at = datetime.now()
-                self.update_at = self.created_at
+                self.update_at = datetime.now()
             models.storage.new(self)
 
     def __str__(self):
         """Prints tha name, id and dict"""
-        return (f"[{__class__.__name__}] ({self.id}) {self.__dict__}")
+        return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """updates the public instance attribute"""
