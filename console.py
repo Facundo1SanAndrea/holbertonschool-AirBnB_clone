@@ -4,9 +4,9 @@ import cmd
 
 from models.base_model import BaseModel
 
-from models import storage
-
 import sys
+
+from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpeter"""
@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         """create a new instance of basemodel"""
         if args is not None and args != "":
             new_args = args.split()
-            if new_args[0] not in self.classes:
+            if new_args[0] not in self.__class__:
                 print("** class doesn't exist **")
                 return
             else:
@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         """ Prints the string representation based on the class name and id"""
         if args is not None and args != "":
             new_args = args.split()
-            if new_args[0] not in self.classes:
+            if new_args[0] not in self.__class__:
                 print("** class doesn't exist **")
                 return
             if len(new_args) == 1:
@@ -66,12 +66,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_args = args.split()
             if len(new_args) == 1:
-                if new_args[0] in self.classes:
+                if new_args[0] in self.__class__:
                     print("** instance id missing **")
                 else:
                     print("** class doesn't exist **")
             else:
-                if new_args[0] in self.classes:
+                if new_args[0] in self.__class__:
                     new_dict = storage.all()
                     key = f"{new_args[0]}.{new_args[1]}"
                     if key in new_dict:
@@ -81,6 +81,26 @@ class HBNBCommand(cmd.Cmd):
                         print("** no instance found **")
                 else:
                     print("** class doesn't exist **")
+
+    def do_all(self, args):
+        """Prints all string representation of all instances based or not on the class name"""
+        new_dict = storage.all()
+        new_list = []
+        if len(args) < 1:
+            for key in new_dict:
+                _obj = new_dict[key]
+                new_list.append(str(_obj))
+            print(new_list)
+        else:
+            list_ = args.split()
+            if list_[0] in self.__class__:
+                for key, value in new_dict.items():
+                    if list_[0] == value.__class__.__name__:
+                        _obj = new_dict[key]
+                        new_list.append(str(_obj))
+                print(new_list)
+            else:
+                print("** class doesn't exist **")
 
         
 
