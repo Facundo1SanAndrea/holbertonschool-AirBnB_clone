@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 """program that contains the entry point of the command interpreter"""
 import cmd
-
 from models.base_model import BaseModel
-
 from models.user import User
-
-import sys
-
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 import models
+import json
 
 
 class HBNBCommand(cmd.Cmd):
@@ -29,19 +30,16 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """create a new instance of basemodel"""
-        if args is not None and args != "":
-            new_args = args.split()
-            if new_args[0] not in self.classes:
-                print("** class doesn't exist **")
-                return
-            else:
-                get_ = getattr(sys.modules[__name__], new_args[0])
-                newer_args = get_()
-                newer_args.save()
-                print(newer_args.id)
-        else:
+        if len(args)  < 1:
             print("** class name missing **")
             return
+        if args == 'BaseModel':
+            _object = models.base_model.BaseModel()
+        else:
+            print("** class doesn\'t exist **")
+            return
+        models.storage.save()
+        print(_object.id)
 
                 
     def do_show(self, args):
