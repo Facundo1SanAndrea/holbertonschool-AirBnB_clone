@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 import sys
 
-from models import storage
+import models
 
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpeter"""
@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         """create a new instance of basemodel"""
         if args is not None and args != "":
             new_args = args.split()
-            if new_args[0] not in self.__class__:
+            if new_args[0] not in self.classes:
                 print("** class doesn't exist **")
                 return
             else:
@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
         """ Prints the string representation based on the class name and id"""
         if args is not None and args != "":
             new_args = args.split()
-            if new_args[0] not in self.__class__:
+            if new_args[0] not in self.classes:
                 print("** class doesn't exist **")
                 return
             if len(new_args) == 1:
@@ -66,12 +66,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             new_args = args.split()
             if len(new_args) == 1:
-                if new_args[0] in self.__class__:
+                if new_args[0] in self.classes:
                     print("** instance id missing **")
                 else:
                     print("** class doesn't exist **")
             else:
-                if new_args[0] in self.__class__:
+                if new_args[0] in self.classes:
                     new_dict = storage.all()
                     key = f"{new_args[0]}.{new_args[1]}"
                     if key in new_dict:
@@ -93,7 +93,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_list)
         else:
             list_ = args.split()
-            if list_[0] in self.__class__:
+            if list_[0] in self.classes:
                 for key, value in new_dict.items():
                     if list_[0] == value.__class__.__name__:
                         _obj = new_dict[key]
