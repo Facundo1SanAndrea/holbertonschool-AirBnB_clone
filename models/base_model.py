@@ -19,7 +19,7 @@ class BaseModel:
                     self.id = value
                 elif key == "created_at":
                     self.created_at = datetime.strptime(value, forma_t)
-                elif key == "updateed_at":
+                elif key == "updated_at":
                     self.update_at = datetime.strptime(value, forma_t)
                 else:
                     setattr(self, key, value)
@@ -31,7 +31,7 @@ class BaseModel:
 
     def str(self):
         """Prints tha name, id and dict"""
-        return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """updates the public instance attribute"""
