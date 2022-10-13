@@ -4,9 +4,12 @@ import cmd
 
 from models.base_model import BaseModel
 
+from models.user import User
+
 import sys
 
 import models
+
 
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpeter"""
