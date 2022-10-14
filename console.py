@@ -27,6 +27,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_emptyline(self):
+        """empty line"""
         pass
 
     def do_create(self, args):
@@ -54,10 +55,10 @@ class HBNBCommand(cmd.Cmd):
                 print ("** instance id missing **")
                 return
             key = new_args[0] + "." + new_args[1]
-            if key not in storage.all():
+            if key not in file_storage.all():
                 print("** no instance found **")
                 return
-            print(storage.all()[key])
+            print(file_storage.all()[key])
         else:
             print("** class name missing **")
 
@@ -74,11 +75,11 @@ class HBNBCommand(cmd.Cmd):
                     print("** class doesn't exist **")
             else:
                 if new_args[0] in self.classes:
-                    new_dict = storage.all()
+                    new_dict = file_storage.all()
                     key = f"{new_args[0]}.{new_args[1]}"
                     if key in new_dict:
                         del new_args[key]
-                        storage.save()
+                        file_storage.save()
                     else:
                         print("** no instance found **")
                 else:
@@ -86,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """Prints all string representation of all instances based or not on the class name"""
-        new_dict = storage.all()
+        new_dict = file_storage.all()
         new_list = []
         if len(args) < 1:
             for key in new_dict:
