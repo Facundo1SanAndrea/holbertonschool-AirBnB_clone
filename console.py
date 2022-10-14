@@ -10,7 +10,7 @@ from models.amenity import Amenity
 from models.review import Review
 import models
 import json
-from models import storage
+from models.engine import file_storage
 
 
 class HBNBCommand(cmd.Cmd):
