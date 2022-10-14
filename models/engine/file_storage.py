@@ -12,6 +12,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage:
     """serializes instances to a JSON file"""
     __file_path = "file.json"
