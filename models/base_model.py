@@ -29,7 +29,7 @@ class BaseModel:
                 self.update_at = datetime.now()
             models.storage.new(self)
 
-    def str(self):
+    def __str__(self):
         """Prints tha name, id and dict"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 

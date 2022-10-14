@@ -17,7 +17,7 @@ class HBNBCommand(cmd.Cmd):
     """HBNB command interpeter"""
 
     prompt = "(hbnb)"
-
+ 
     def do_quit(self, args):
         """exit program"""
         return True
