@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 """program that contains the entry point of the command interpreter"""
+import cmd
+import sys
+import uuid
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -8,9 +12,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 from models.engine import file_storage
-import cmd
-import models
-import json
+
 
 
 class HBNBCommand(cmd.Cmd):
@@ -35,9 +37,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """create a new instance of basemodel"""
+        #class no args
         if len(args)  < 1:
             print("** class name missing **")
             return
+        #class with args
         if args == 'BaseModel':
             _object = models.base_model.BaseModel()
         else:
@@ -51,9 +55,11 @@ class HBNBCommand(cmd.Cmd):
         """ Prints the string representation based on the class name and id"""
         if args is not None and args != "":
             new_args = args.split()
+            #has no first args
             if new_args[0] not in self.classes:
                 print("** class doesn't exist **")
                 return
+            #Has first args , checks wat is
             if len(new_args) == 1:
                 print ("** instance id missing **")
                 return
@@ -67,16 +73,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id"""
+        #Checks for the len an args
         if len(args) < 1:
             print("** class name missing **")
         else:
             new_args = args.split()
+            #checks is it has a rgs , and if it is one the clases
             if len(new_args) == 1:
                 if new_args[0] in self.classes:
                     print("** instance id missing **")
                 else:
                     print("** class doesn't exist **")
             else:
+                #if args is in classes
                 if new_args[0] in self.classes:
                     new_dict = file_storage.all()
                     key = f"{new_args[0]}.{new_args[1]}"
