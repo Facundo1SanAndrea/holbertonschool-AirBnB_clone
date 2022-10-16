@@ -22,7 +22,6 @@ class BaseModel:
                     self.updated_at = datetime.strptime(value, forma_t)
                 elif key == 'name':
                     self.name = value
-                    print("setting name")
                 else:
                     setattr(self, key, value)
         #no parameters given
