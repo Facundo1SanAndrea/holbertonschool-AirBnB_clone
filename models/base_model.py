@@ -7,28 +7,31 @@ import models
 class BaseModel:
     """A class of a base modle"""
 
-    def init(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """public instance attri"""
         forma_t = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
-                if key == "__class__":
+                if key == '__class__':
                     pass
-                elif key == "id":
+                elif key == 'id':
                     self.id = value
-                elif key == "created_at":
+                elif key == 'created_at':
                     self.created_at = datetime.strptime(value, forma_t)
-                elif key == "updated_at":
-                    self.update_at = datetime.strptime(value, forma_t)
+                elif key == 'updated_at':
+                    self.updated_at = datetime.strptime(value, forma_t)
+                elif key == 'name':
+                    self.name = value
+                    print("setting name")
                 else:
                     setattr(self, key, value)
-        #nno parameters given
-            else:
-                self.id = str(uuid.uuid4())
-                self.created_at = datetime.now()
-                self.update_at = datetime.now()
-                #calls "new" methodof filestorage class
-                models.storage.new(self)
+        #no parameters given
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            #calls "new" method of filestorage class
+            models.storage.new(self)
 
     def __str__(self):
         """ returns string representation of the object """
@@ -36,7 +39,7 @@ class BaseModel:
 
     def save(self):
         """updates the public instance attribute"""
-        self.update_at = datetime.now()
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):
