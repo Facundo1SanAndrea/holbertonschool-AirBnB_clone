@@ -31,8 +31,8 @@ class HBNBCommand(cmd.Cmd):
         """exit program"""
         return True
 
-    def do_emptyline(self):
-        """empty line"""
+    def emptyline(self):
+        """skip next line"""
         pass
 
     def do_create(self, args):
