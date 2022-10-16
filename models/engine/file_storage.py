@@ -2,8 +2,8 @@
 """class FileStorage that serializes instances to a JSON"""
 
 import json
-from os import path
 import os
+from os import path
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -11,7 +11,6 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
-
 
 class FileStorage:
     """serializes instances to a JSON file"""
