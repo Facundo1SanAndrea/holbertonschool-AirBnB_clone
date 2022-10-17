@@ -1,4 +1,3 @@
-#!/usr/bin/python3}
 """Tests for base class place """
 import unittest
 from models.place import Place
