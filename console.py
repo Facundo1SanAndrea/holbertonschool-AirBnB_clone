@@ -91,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
                     new_dict = storage.all()
                     key = f"{new_args[0]}.{new_args[1]}"
                     if key in new_dict:
-                        del new_args[key]
+                        new_dict.pop(key)
                         storage.save()
                     else:
                         print("** no instance found **")
