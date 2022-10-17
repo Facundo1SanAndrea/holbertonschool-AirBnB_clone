@@ -9,12 +9,12 @@ import models
 class BaseModel:
     """A class of a base modle"""
 
-    def init(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         """public instance attri"""
         forma_t = '%Y-%m-%dT%H:%M:%S.%f'
         if kwargs is not None and len(kwargs) != 0:
             for key, value in kwargs.items():
-                if key == "__class__":
+                if key == '__class__':
                     pass
                 elif key == "id":
                     self.id = value
@@ -22,6 +22,8 @@ class BaseModel:
                     self.created_at = datetime.strptime(value, forma_t)
                 elif key == "updated_at":
                     self.update_at = datetime.strptime(value, forma_t)
+                elif key == 'name':
+                    self.name = value
                 else:
                     setattr(self, key, value)
             else:
@@ -32,7 +34,7 @@ class BaseModel:
 
     def __str__(self):
         """Prints tha name, id and dict"""
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+        return (f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}")
 
     def save(self):
         """updates the public instance attribute"""
