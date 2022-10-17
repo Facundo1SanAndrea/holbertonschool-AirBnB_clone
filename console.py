@@ -15,7 +15,6 @@ from models.engine import file_storage
 from models import storage
 
 
-
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpeter"""
 
@@ -23,7 +22,7 @@ class HBNBCommand(cmd.Cmd):
 
     classes = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
                "City": City, "Place": Place, "State": State, "Review": Review}
- 
+
     def do_quit(self, args):
         """exit program"""
         return True
@@ -38,11 +37,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """create a new instance of basemodel"""
-        #class no args
-        if len(args)  < 1:
+        # class no args
+        if len(args) < 1:
             print("** class name missing **")
             return
-        #class with args
+        # class with args
         if args == 'BaseModel':
             _object = models.base_model.BaseModel()
         else:
@@ -51,18 +50,17 @@ class HBNBCommand(cmd.Cmd):
         models.storage.save()
         print(_object.id)
 
-                
     def do_show(self, args):
         """ Prints the string representation based on the class name and id"""
         if args is not None and args != "":
             new_args = args.split()
-            #has no first args
+            # has no first args
             if new_args[0] not in self.classes:
                 print("** class doesn't exist **")
                 return
-            #Has first args , checks wat is
+            # Has first args , checks wat is
             if len(new_args) == 1:
-                print ("** instance id missing **")
+                print("** instance id missing **")
                 return
             key = new_args[0] + "." + new_args[1]
             if key not in storage.all():
@@ -74,19 +72,19 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id"""
-        #Checks for the len an args
+        # Checks for the len an args
         if len(args) < 1:
             print("** class name missing **")
         else:
             new_args = args.split()
-            #checks is it has a rgs , and if it is one the clases
+            # checks is it has a rgs , and if it is one the clases
             if len(new_args) == 1:
                 if new_args[0] in self.classes:
                     print("** instance id missing **")
                 else:
                     print("** class doesn't exist **")
             else:
-                #if args is in classes
+                # if args is in classes
                 if new_args[0] in self.classes:
                     new_dict = storage.all()
                     key = f"{new_args[0]}.{new_args[1]}"
