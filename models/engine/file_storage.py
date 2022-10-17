@@ -41,4 +41,4 @@ class FileStorage:
                 this_dict = json.loads(file_json)
                 for key, value in this_dict.items():
 
-                    self.new(eval(value['__class__'])(**value))
+                    self.new(eval(value['__class__'](**value)))
