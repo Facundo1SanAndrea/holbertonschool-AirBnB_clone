@@ -2,8 +2,8 @@
 """class FileStorage that serializes instances to a JSON"""
 
 import json
-import os
 from os import path
+import os
 from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
@@ -12,6 +12,7 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage:
     """serializes instances to a JSON file"""
     __file_path = "file.json"
@@ -19,11 +20,11 @@ class FileStorage:
 
     def all(self):
         """return the dictionary"""
-        return self.__objects
+        return __class__.__objects
 
     def new(self, obj):
         """sets in the obj the class name id"""
-        self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
+        __class__.__objects[obj.__class__.__name__ + "." + obj.id] = obj
 
     def save(self):
         """serializes __objects to the JSON file"""
@@ -36,8 +37,8 @@ class FileStorage:
     def reload(self):
         """deserializes the JSON file to __objects"""
         if os.path.exists(self.__file_path):
-            with open(self.__file_path) as file_json:
-                this_dict = json.load(file_json)
+            with open(self.__file_path, 'r') as file_json:
+                this_dict = json.loads(file_json)
                 for key, value in this_dict.items():
 
                     self.new(eval(value['__class__'])(**value))

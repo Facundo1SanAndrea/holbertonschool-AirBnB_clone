@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** class doesn't exist **")
 
     def do_all(self, args):
-        """Prints all string representation of all 
+        """Prints all string representation of all
         instances based or not on the class name"""
         new_dict = storage.all()
         new_list = []
