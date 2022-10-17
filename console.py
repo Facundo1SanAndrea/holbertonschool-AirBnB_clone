@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """program that contains the entry point of the command interpreter"""
+from ast import arg
 import cmd
 import sys
 import uuid
@@ -20,8 +21,8 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb)"
 
-    classes = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
-               "City": City, "Place": Place, "State": State, "Review": Review}
+    classes = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,\
+         "City": City, "Place": Place, "State": State, "Review": Review}
 
     def do_quit(self, args):
         """exit program"""
@@ -38,17 +39,14 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """create a new instance of basemodel"""
         # class no args
-        if len(args) < 1:
+        arg_list = args.split()
+        if len(arg_list) < 1:
             print("** class name missing **")
             return
         # class with args
-        if args == 'BaseModel':
-            _object = models.base_model.BaseModel()
-        else:
-            print("** class doesn\'t exist **")
-            return
+        obj_ect = eval(arg_list[0])()
         models.storage.save()
-        print(_object.id)
+        print(obj_ect.id)
 
     def do_show(self, args):
         """ Prints the string representation based on the class name and id"""

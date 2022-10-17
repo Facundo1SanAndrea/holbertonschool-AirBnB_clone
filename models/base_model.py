@@ -7,7 +7,7 @@ import models
 
 
 class BaseModel:
-    """A class of a base model """
+    """A class of a base model"""
 
     def __init__(self, *args, **kwargs):
         """public instance attribute"""
