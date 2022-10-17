@@ -141,8 +141,8 @@ class HBNBCommand(cmd.Cmd):
         if len(_list) == 3:
             print("** value missing **")
             return
-            file_storage.all()[key].__dict__[listt[2]] = listt[3]
-            file_storage.save()
+        storage.all()[key].__dict__[_list[2]] = _list[3]
+        storage.save()
 
 
 if __name__ == '__main__':
