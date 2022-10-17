@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """program that contains the entry point of the command interpreter"""
-from ast import arg
 import cmd
 import sys
 import uuid
