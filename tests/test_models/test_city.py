@@ -1,40 +1,17 @@
-#!/usr/bin/python3
 
-
+"""Tests for base class city """
 import unittest
-import models
 from models.city import City
-from models import storage
-from datetime import datetime
-from models.base_model import BaseModel
 
 
-class TestCity(unittest.TestCase):
-    """Unittests for the City class"""
+class Testuser(unittest.TestCase):
+    ''' unittest class for checking city'''
 
-    def test_subclass(self):
-        """checks is City is a subclass of BaseModel"""
-        self.assertTrue(issubclass(City, BaseModel))
-
-    def test_inst(self):
-        """Tests if the instances of User are correctly created"""
-        C1 = City()
-        C2 = City()
-
-        self.assertNotEqual(C1.id, C2.id)
-        self.assertNotEqual(C1.created_at, C2.created_at)
-        self.assertNotEqual(C1.updated_at, C2.updated_at)
-        self.assertIn(C1, storage.all().values())
-        self.assertIn(C2, storage.all().values())
-        self.assertEqual(City.state_id, "")
-        self.assertEqual(City.name, "")
-
-
-    def test_attr(self):
-        """Tests is an attribute of an instance is created"""
-        my_city = City()
-        self.assertEqual(my_city.state_id, "")
-        self.assertEqual(my_city.name, "")
+    def test_create_state(self):
+        ''' creating city class '''
+        state1 = City()
+        self.assertEqual(state1.state_id, "")
+        self.assertEqual(state1.name, "")
 
 if __name__ == '__main__':
     unittest.main()
